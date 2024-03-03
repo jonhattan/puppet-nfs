@@ -34,13 +34,11 @@
 
 class nfs::client (
   $package_ensure      = $::nfs::params::client_package_ensure,
-  $nfs_v4              = $::nfs::params::nfs_v4,
+  Boolean $nfs_v4              = $::nfs::params::nfs_v4,
   $nfs_v4_mount_root   = $::nfs::params::nfs_v4_mount_root,
   $nfs_v4_idmap_domain = $::nfs::params::nfs_v4_idmap_domain,
   $mounts              = undef
 ) inherits nfs::params {
-
-  validate_bool($nfs_v4)
 
   # ensure dependencies for mount
 

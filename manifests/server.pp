@@ -38,17 +38,17 @@
 
 class nfs::server (
   $package_ensure               = $::nfs::params::server_package_ensure,
-  $nfs_v4                       = $nfs::params::nfs_v4,
+  Boolean $nfs_v4                       = $nfs::params::nfs_v4,
   $nfs_v4_export_root           = $nfs::params::nfs_v4_export_root,
   $nfs_v4_export_root_clients   = $nfs::params::nfs_v4_export_root_clients,
   $nfs_v4_idmap_domain          = $nfs::params::nfs_v4_idmap_domain,
   #
-  $service_manage               = true,
+  Boolean $service_manage               = true,
   #
   $nfs_v4_root_export_ensure    = 'mounted',
   $nfs_v4_root_export_mount     = undef,
-  $nfs_v4_root_export_remounts  = false,
-  $nfs_v4_root_export_atboot    = false,
+  Boolean $nfs_v4_root_export_remounts  = false,
+  Boolean $nfs_v4_root_export_atboot    = false,
   $nfs_v4_root_export_options   = '_netdev',
   $nfs_v4_root_export_bindmount = undef,
   $nfs_v4_root_export_tag       = undef,
@@ -58,11 +58,6 @@ class nfs::server (
   #
   $exports                      = undef,
 ) inherits nfs::params {
-
-  validate_bool($nfs_v4)
-  validate_bool($service_manage)
-  validate_bool($nfs_v4_root_export_remounts)
-  validate_bool($nfs_v4_root_export_atboot)
 
   class { "nfs::server::${::nfs::params::osfamily}":
     nfs_v4              => $nfs_v4,
